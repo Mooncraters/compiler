@@ -47,7 +47,7 @@ void outputErrors();
 // -errorbound [n] 表示指定错误上限，默认无上限，即编译器发现了指定个数的错误后，立即停止运行
 // -developer表示输出开发者信息
 // -version表示输出版本信息
-// -help表示输出所有命令行参数的帮助信息
+// -help表示输出所有命令行参数的help信息
 
 int main(int argc, char **argv){
 	argumentsExplanationInit();
