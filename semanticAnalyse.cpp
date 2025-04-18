@@ -9,7 +9,7 @@
 #include "symbolTable.h"
 #include "ASTnodes.h"
 #include "main.h"
-
+#include "util.h"
 using namespace std;
 
 extern _SymbolTable *mainSymbolTable;//主符号表
@@ -18,7 +18,6 @@ extern _SymbolRecord* findSymbolRecord(_SymbolTable* currentSymbolTable, string 
 extern void inputFunctionCall(_FunctionCall *functionCallNode, string &functionCall, int mode=0);//获取函数调用
 extern int inputExpression(_Expression *expressionNode, string &expression, int mode=0, bool isReferedActualPara=false);//获取表达式
 extern void inputVariantRef(_VariantReference *variantRefNode, string &variantRef, int mode=0, bool isReferedActualPara=false);//获取变量引用
-extern int str2int(string str);
 extern void returnExistedCheckFunctionDefinition(_FunctionDefinition* functionDefinitionNode);
 
 vector<string> semanticErrorInformation;//存储错误信息的列表

@@ -2,11 +2,10 @@
 普通语法分析树到抽象语法树的转换
 */
 #include "main.h"
+#include "util.h"
 #include "ASTnodes.h"
 #include <algorithm>
 
-int str2int(string str);
-float str2float(string str);
 void getIdList(Type *now, vector< pair<string, int> >& res,bool reverseFlag);
 void getArrayRangeList(Type *now, vector< pair<int, int> >& _arrayRangeList);
 _Type* getType(Type *now);
@@ -45,31 +44,6 @@ bool checkToken(Type *now, const string& expectedToken, const string& functionNa
         return false;
     }
     return true;
-}
-int str2int(string str){
-    int res=0;
-    int len=int(str.length());
-    for(int i=0;i<len;i++){
-        res=res*10;
-        res+=str[i]-'0';
-    }
-    return res;
-}
-
-float str2float(string str){
-    float res=0;
-    int len=int(str.length());
-    int loc=int(str.find('.'));
-    for(int i=0;i<loc;i++){
-        res*=10;
-        res+=str[i]-'0';
-    }
-    float base=1;
-    for(int i=loc+1;i<len;i++){
-        base=base*0.1;
-        res+=base*(str[i]-'0');
-    }
-    return res;
 }
 
 void getIdList(Type *now,vector< pair<string,int> >& res,bool reverseFlag){
