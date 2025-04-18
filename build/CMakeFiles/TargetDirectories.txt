@@ -1,7 +1,7 @@
-C:/code/compiler/pascal2c-compiler/src/build/CMakeFiles/pascal2c.dir
-C:/code/compiler/pascal2c-compiler/src/build/CMakeFiles/edit_cache.dir
-C:/code/compiler/pascal2c-compiler/src/build/CMakeFiles/rebuild_cache.dir
-C:/code/compiler/pascal2c-compiler/src/build/CMakeFiles/list_install_components.dir
-C:/code/compiler/pascal2c-compiler/src/build/CMakeFiles/install.dir
-C:/code/compiler/pascal2c-compiler/src/build/CMakeFiles/install/local.dir
-C:/code/compiler/pascal2c-compiler/src/build/CMakeFiles/install/strip.dir
+C:/code/compiler/compiler/build/CMakeFiles/compiler.dir
+C:/code/compiler/compiler/build/CMakeFiles/edit_cache.dir
+C:/code/compiler/compiler/build/CMakeFiles/rebuild_cache.dir
+C:/code/compiler/compiler/build/CMakeFiles/list_install_components.dir
+C:/code/compiler/compiler/build/CMakeFiles/install.dir
+C:/code/compiler/compiler/build/CMakeFiles/install/local.dir
+C:/code/compiler/compiler/build/CMakeFiles/install/strip.dir
