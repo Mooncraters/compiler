@@ -2,6 +2,7 @@
 主函数
 */
 #include "main.h"
+#include "util.h"
 #include <fstream>
 #include <stdlib.h>
 #include <string.h>
@@ -33,8 +34,6 @@ map<string, string> argumentsExplanation;
 void preProcess(string inName);
 void argumentsExplanationInit();
 void outputArgumentsExplanation();
-string char2str(char* chs);
-bool chs2int(char* chs, int &num);
 void dfs(Type* now);
 void getRunArguments(int argc, char **argv, string &inName, string &outName, string &compilerName, string &exeName, int &errorBound, bool &willCompile, bool &willExecute);
 void outputErrors();
@@ -168,29 +167,6 @@ void outputArgumentsExplanation() {
 	for (auto it = argumentsExplanation.begin(); it != argumentsExplanation.end(); it++) {
 		cout << it->second << endl;
 	}
-}
-
-string char2str(char* chs) {
-	string res;
-	for (; *chs != 0; chs++)
-		res += *chs;
-	return res;
-}
-
-bool chs2int(char* chs, int &num) {
-	int tmp = num;
-	num = 0;
-	for (; *chs != '\0'; chs++) {
-		if (*chs >= '0'&&*chs <= '9') {
-			num *= 10;
-			num += *chs - '0';
-		}
-		else {
-			num = tmp;
-			return false;
-		}
-	}
-	return true;
 }
 
 //普通语法树的debug信息（遍历输出）
