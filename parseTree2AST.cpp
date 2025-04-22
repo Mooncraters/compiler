@@ -267,69 +267,85 @@ void getSubprogramHead(Type *now,pair<string,int>& functionID,vector<_FormalPara
 //"var"表示变量,"integer"表示整数,"real"表示浮点数,"char"表示字符常量
 //"function"表示函数调用,"compound"表示复合表达式
 //compound有普通的二目运算符，还有minus、not、bracket等单目运算符
-_Expression* getFactor(Type *now){
-    // if(now->token!="factor"){
-    //     cout << "getFactor error" << endl;
-	// 	return NULL;
-    // }
+_Expression* createExpression(Type* now, const string& type, int lineNumber) {
+    _Expression* _expression = new _Expression;
+    _expression->type = type;
+    _expression->lineNumber = lineNumber;
+    _expression->operand1 = _expression->operand2 = NULL;
+    return _expression;
+}
+
+void handleIntegerFactor(Type* now, _Expression* _expression) {
+    _expression->strOfNum = now->children[0]->str;
+    _expression->intNum = str2int(now->children[0]->str);
+}
+
+void handleRealFactor(Type* now, _Expression* _expression) {
+    _expression->strOfNum = now->children[0]->str;
+    _expression->realNum = str2float(now->children[0]->str);
+}
+
+void handleVariableFactor(Type* now, _Expression* _expression) {
+    _expression->variantReference = getVariantReference(now->children[0]);
+    _expression->lineNumber = _expression->variantReference->variantId.second;
+}
+
+void handleFunctionFactor(Type* now, _Expression* _expression) {
+    _expression->functionCall = new _FunctionCall;
+    _expression->functionCall->functionId = make_pair(now->children[0]->str, now->children[0]->lineNumber);
+    getExpressionList(now->children[2], _expression->functionCall->actualParaList);
+    _expression->lineNumber = _expression->functionCall->functionId.second;
+}
+
+void handleCompoundFactor(Type* now, _Expression* _expression, const string& operation) {
+    _expression->operationType = "single";
+    _expression->operation = operation;
+    _expression->operand1 = getExpression(now->children[1]);
+    _expression->lineNumber = _expression->operand1->lineNumber;
+}
+
+void handleCharFactor(Type* now, _Expression* _expression) {
+    _expression->charVal = now->children[0]->str[0];
+}
+
+_Expression* getFactor(Type* now) {
     if (!checkToken(now, "factor", "getFactor"))
         return NULL;
-    _Expression* _expression = new _Expression;
-    _expression->operand1=_expression->operand2=NULL;
-    if(now->children[0]->token=="UINUM"){
-        _expression->type="integer";
-		_expression->strOfNum = now->children[0]->str;
-        _expression->intNum=str2int(now->children[0]->str);
-        _expression->lineNumber=now->children[0]->lineNumber;
-    }
-    else if(now->children[0]->token=="UFNUM"){
-        _expression->type="real";
-		_expression->strOfNum = now->children[0]->str;
-        _expression->realNum=str2float(now->children[0]->str);
-        _expression->lineNumber=now->children[0]->lineNumber;
-    }
-    else if(now->children[0]->token=="variable"){
-        _expression->type="var";
-        _expression->variantReference=getVariantReference(now->children[0]);
-		_expression->lineNumber = _expression->variantReference->variantId.second;
-    }
-    else if(now->children[0]->token=="IDENTIFIER"){
-        _expression->type="function";
-        _expression->functionCall = new _FunctionCall;
-        _expression->functionCall->functionId=make_pair(now->children[0]->str,now->children[0]->lineNumber);
-        getExpressionList(now->children[2],_expression->functionCall->actualParaList);
-		_expression->lineNumber = _expression->functionCall->functionId.second;
-    }
-    else if(now->children[0]->token=="("){
-        _expression->type="compound";
-		_expression->operationType = "single";
-        _expression->operation="bracket";
-        _expression->operand1=getExpression(now->children[1]);
-		_expression->lineNumber = _expression->operand1->lineNumber;
-    }
-    else if(now->children[0]->token=="NOT"){
-        _expression->type="compound";
-		_expression->operationType = "single";
-        _expression->operation="not";
-        _expression->operand1=getFactor(now->children[1]);
-		_expression->lineNumber = _expression->operand1->lineNumber;
-    }
-    else if(now->children[0]->token=="-"){
-        _expression->type="compound";
-		_expression->operationType = "single";
-        _expression->operation="minus";
-        _expression->operand1=getFactor(now->children[1]);
-		_expression->lineNumber = _expression->operand1->lineNumber;
-    }
-	else if (now->children[0]->token == "CHAR") {
-		_expression->type = "char";
-		_expression->charVal = now->children[0]->str[0];
-		_expression->lineNumber = now->children[0]->lineNumber;
-	}
-    else{
+
+    _Expression* _expression = NULL;
+
+    const string& token = now->children[0]->token;
+    const int lineNumber = now->children[0]->lineNumber;
+
+    if (token == "UINUM") {
+        _expression = createExpression(now, "integer", lineNumber);
+        handleIntegerFactor(now, _expression);
+    } else if (token == "UFNUM") {
+        _expression = createExpression(now, "real", lineNumber);
+        handleRealFactor(now, _expression);
+    } else if (token == "variable") {
+        _expression = createExpression(now, "var", lineNumber);
+        handleVariableFactor(now, _expression);
+    } else if (token == "IDENTIFIER") {
+        _expression = createExpression(now, "function", lineNumber);
+        handleFunctionFactor(now, _expression);
+    } else if (token == "(") {
+        _expression = createExpression(now, "compound", lineNumber);
+        handleCompoundFactor(now, _expression, "bracket");
+    } else if (token == "NOT") {
+        _expression = createExpression(now, "compound", lineNumber);
+        handleCompoundFactor(now, _expression, "not");
+    } else if (token == "-") {
+        _expression = createExpression(now, "compound", lineNumber);
+        handleCompoundFactor(now, _expression, "minus");
+    } else if (token == "CHAR") {
+        _expression = createExpression(now, "char", lineNumber);
+        handleCharFactor(now, _expression);
+    } else {
         cout << "getFactor error" << endl;
         return NULL;
     }
+
     return _expression;
 }
 
