@@ -46,3 +46,9 @@ string char2str(char* chs) {
 		res += *chs;
 	return res;
 }
+
+string itos(int num) {
+	stringstream ssin;
+	ssin << num;
+	return ssin.str();
+}

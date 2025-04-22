@@ -39,7 +39,6 @@ void SemanticAnalyseFormalParameter(_FormalParameter *formalParameter);//对形�
 string SemanticAnalyseFunctionCall(_FunctionCall *functionCall);//对函数调用进行语义分析
 string SemanticAnalyseExpression(_Expression* expression);//对表达式进行语义分析
 
-string itos(int num);//将int转化为string
 
 //添加重定义错误信息
 void addDuplicateDefinitionErrorInformation(string preId, int preLineNumber, string preFlag, string preType,int curLineNumber);//获得重复定义的语义错误信息
@@ -798,11 +797,6 @@ void SemanticAnalyseProgram(_Program *program) {
 	SemanticAnalyseSubprogram(program->subProgram);
 }
 
-string itos(int num) {
-	stringstream ssin;
-	ssin << num;
-	return ssin.str();
-}
 
 void addDuplicateDefinitionErrorInformation(string preId, int preLineNumber, string preFlag, string preType, int curLineNumber){
 	string errorInformation = "[Duplicate defined error!] <Line " + itos(curLineNumber) + "> ";
