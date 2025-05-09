@@ -1,5 +1,5 @@
 /*
-ÓïÒå·ÖÎöÊµÏÖ´úÂë
+è¯­ä¹‰åˆ†æå®ç°ä»£ç 
 */
 #include <string>
 #include <vector>
@@ -11,12 +11,12 @@
 #include "semanticErrorProcess.h"
 using namespace std;
 
-extern _SymbolTable *mainSymbolTable;//Ö÷·ûºÅ±í
-extern _SymbolTable *currentSymbolTable;//µ±Ç°·ûºÅ±í
-extern _SymbolRecord* findSymbolRecord(_SymbolTable* currentSymbolTable, string id, int mode=0);//´Ó·ûºÅ±íÖĞÕÒ³öid¶ÔÓ¦µÄ¼ÇÂ¼
-extern void inputFunctionCall(_FunctionCall *functionCallNode, string &functionCall, int mode=0);//»ñÈ¡º¯Êıµ÷ÓÃ
-extern int inputExpression(_Expression *expressionNode, string &expression, int mode=0, bool isReferedActualPara=false);//»ñÈ¡±í´ïÊ½
-extern void inputVariantRef(_VariantReference *variantRefNode, string &variantRef, int mode=0, bool isReferedActualPara=false);//»ñÈ¡±äÁ¿ÒıÓÃ
+extern _SymbolTable *mainSymbolTable;//ä¸»ç¬¦å·è¡¨
+extern _SymbolTable *currentSymbolTable;//å½“å‰ç¬¦å·è¡¨
+extern _SymbolRecord* findSymbolRecord(_SymbolTable* currentSymbolTable, string id, int mode=0);//ä»ç¬¦å·è¡¨ä¸­æ‰¾å‡ºidå¯¹åº”çš„è®°å½•
+extern void inputFunctionCall(_FunctionCall *functionCallNode, string &functionCall, int mode=0);//è·å–å‡½æ•°è°ƒç”¨
+extern int inputExpression(_Expression *expressionNode, string &expression, int mode=0, bool isReferedActualPara=false);//è·å–è¡¨è¾¾å¼
+extern void inputVariantRef(_VariantReference *variantRefNode, string &variantRef, int mode=0, bool isReferedActualPara=false);//è·å–å˜é‡å¼•ç”¨
 extern int str2int(string str);
 extern void returnExistedCheckFunctionDefinition(_FunctionDefinition* functionDefinitionNode);
 
@@ -24,89 +24,89 @@ extern void returnExistedCheckFunctionDefinition(_FunctionDefinition* functionDe
 
 void SemanticAnalyse(_Program *ASTRoot);
 
-void createSymbolTableAndInit();//´´½¨Ö÷·ûºÅ±í²¢³õÊ¼»¯
-void createSubSymbolTableAndInit();//´´½¨×Ó·ûºÅ±í²¢³õÊ¼»¯
+void createSymbolTableAndInit();//åˆ›å»ºä¸»ç¬¦å·è¡¨å¹¶åˆå§‹åŒ–
+void createSubSymbolTableAndInit();//åˆ›å»ºå­ç¬¦å·è¡¨å¹¶åˆå§‹åŒ–
 
-string SemanticAnalyseVariantReference(_VariantReference* variantReference);//¶Ô±äÁ¿ÒıÓÃ½øĞĞÓïÒå·ÖÎö
-void SemanticAnalyseStatement(_Statement *statement);//¶ÔÓï¾ä½øĞĞÓïÒå·ÖÎö
-void SemanticAnalyseSubprogramDefinition(_FunctionDefinition* functionDefinition);//¶Ô×Ó³ÌĞò¶¨Òå½øĞĞÓïÒå·ÖÎö
-void SemanticAnalyseVariant(_Variant* variant);//¶Ô±äÁ¿¶¨Òå½øĞĞÓïÒå·ÖÎö
-void SemanticAnalyseConst(_Constant* constant);//¶Ô³£Á¿¶¨Òå½øĞĞÓïÒå·ÖÎö
-void SemanticAnalyseSubprogram(_SubProgram* subprogram);//¶Ô·Ö³ÌĞò½øĞĞÓïÒå·ÖÎö
-void SemanticAnalyseProgram(_Program *program);//¶Ô³ÌĞò½øĞĞÓïÒå·ÖÎö
-void SemanticAnalyseFormalParameter(_FormalParameter *formalParameter);//¶ÔĞÎÊ½²ÎÊı½øĞĞÓïÒå·ÖÎö
-string SemanticAnalyseFunctionCall(_FunctionCall *functionCall);//¶Ôº¯Êıµ÷ÓÃ½øĞĞÓïÒå·ÖÎö
-string SemanticAnalyseExpression(_Expression* expression);//¶Ô±í´ïÊ½½øĞĞÓïÒå·ÖÎö
+string SemanticAnalyseVariantReference(_VariantReference* variantReference);//å¯¹å˜é‡å¼•ç”¨è¿›è¡Œè¯­ä¹‰åˆ†æ
+void SemanticAnalyseStatement(_Statement *statement);//å¯¹è¯­å¥è¿›è¡Œè¯­ä¹‰åˆ†æ
+void SemanticAnalyseSubprogramDefinition(_FunctionDefinition* functionDefinition);//å¯¹å­ç¨‹åºå®šä¹‰è¿›è¡Œè¯­ä¹‰åˆ†æ
+void SemanticAnalyseVariant(_Variant* variant);//å¯¹å˜é‡å®šä¹‰è¿›è¡Œè¯­ä¹‰åˆ†æ
+void SemanticAnalyseConst(_Constant* constant);//å¯¹å¸¸é‡å®šä¹‰è¿›è¡Œè¯­ä¹‰åˆ†æ
+void SemanticAnalyseSubprogram(_SubProgram* subprogram);//å¯¹åˆ†ç¨‹åºè¿›è¡Œè¯­ä¹‰åˆ†æ
+void SemanticAnalyseProgram(_Program *program);//å¯¹ç¨‹åºè¿›è¡Œè¯­ä¹‰åˆ†æ
+void SemanticAnalyseFormalParameter(_FormalParameter *formalParameter);//å¯¹å½¢å¼å‚æ•°è¿›è¡Œè¯­ä¹‰åˆ†æ
+string SemanticAnalyseFunctionCall(_FunctionCall *functionCall);//å¯¹å‡½æ•°è°ƒç”¨è¿›è¡Œè¯­ä¹‰åˆ†æ
+string SemanticAnalyseExpression(_Expression* expression);//å¯¹è¡¨è¾¾å¼è¿›è¡Œè¯­ä¹‰åˆ†æ
 
 
-//¼ì²éidÊÇ·ñÓë¿â³ÌĞòÃû¡¢Ö÷³ÌĞòÃû¡¢Ö÷³ÌĞò²ÎÊıÍ¬Ãû
-bool checkIsTheSameAsKey(string id, int lineNumber); //ÕâÀïµÄKeyÖ¸µÄÊÇ¿â³ÌĞòÃû¡¢Ö÷³ÌĞòÃû¡¢Ö÷³ÌĞò²ÎÊı
+//æ£€æŸ¥idæ˜¯å¦ä¸åº“ç¨‹åºåã€ä¸»ç¨‹åºåã€ä¸»ç¨‹åºå‚æ•°åŒå
+bool checkIsTheSameAsKey(string id, int lineNumber); //è¿™é‡Œçš„KeyæŒ‡çš„æ˜¯åº“ç¨‹åºåã€ä¸»ç¨‹åºåã€ä¸»ç¨‹åºå‚æ•°
 
 void SemanticAnalyse(_Program *ASTRoot) {
 	createSymbolTableAndInit();
 	SemanticAnalyseProgram(ASTRoot);
 }
 
-void createSymbolTableAndInit() {//´´½¨Ö÷·ûºÅ±í
-	currentSymbolTable = mainSymbolTable = new _SymbolTable("main");//Ö¸¶¨ÎªÖ÷·ûºÅ±íºó£¬»á×Ô¶¯¼ÓÈëread, writeµÈ¿âº¯Êı
+void createSymbolTableAndInit() {//åˆ›å»ºä¸»ç¬¦å·è¡¨
+	currentSymbolTable = mainSymbolTable = new _SymbolTable("main");//æŒ‡å®šä¸ºä¸»ç¬¦å·è¡¨åï¼Œä¼šè‡ªåŠ¨åŠ å…¥read, writeç­‰åº“å‡½æ•°
 }
 
-void createSubSymbolTableAndInit(){//´´½¨×Ó·ûºÅ±í ·ûºÅ±í¶¨Î»
-	currentSymbolTable = new _SymbolTable("sub");//´´½¨²¢¶¨Î»µ½×Ó·ûºÅ±í
+void createSubSymbolTableAndInit(){//åˆ›å»ºå­ç¬¦å·è¡¨ ç¬¦å·è¡¨å®šä½
+	currentSymbolTable = new _SymbolTable("sub");//åˆ›å»ºå¹¶å®šä½åˆ°å­ç¬¦å·è¡¨
 }
 
-//¶Ô±äÁ¿ÒıÓÃ½øĞĞÓïÒå·ÖÎö
-//±äÁ¿ÒıÓÃ×÷Îª×óÖµ£¬¿ÉÄÜÊÇ´«Öµ²ÎÊı¡¢ÒıÓÃ²ÎÊı¡¢ÆÕÍ¨±äÁ¿¡¢Êı×éÔªËØ¡¢º¯ÊıÃû£¨º¯Êı·µ»ØÖµ£©
-//±äÁ¿ÒıÓÃ×÷ÎªÓÒÖµ£¬¿ÉÄÜÊÇ´«Öµ²ÎÊı¡¢ÒıÓÃ²ÎÊı¡¢ÆÕÍ¨±äÁ¿¡¢Êı×éÔªËØ¡¢º¯ÊıÃû£¨²»´ø²ÎÊıµÄº¯Êı£©
+//å¯¹å˜é‡å¼•ç”¨è¿›è¡Œè¯­ä¹‰åˆ†æ
+//å˜é‡å¼•ç”¨ä½œä¸ºå·¦å€¼ï¼Œå¯èƒ½æ˜¯ä¼ å€¼å‚æ•°ã€å¼•ç”¨å‚æ•°ã€æ™®é€šå˜é‡ã€æ•°ç»„å…ƒç´ ã€å‡½æ•°åï¼ˆå‡½æ•°è¿”å›å€¼ï¼‰
+//å˜é‡å¼•ç”¨ä½œä¸ºå³å€¼ï¼Œå¯èƒ½æ˜¯ä¼ å€¼å‚æ•°ã€å¼•ç”¨å‚æ•°ã€æ™®é€šå˜é‡ã€æ•°ç»„å…ƒç´ ã€å‡½æ•°åï¼ˆä¸å¸¦å‚æ•°çš„å‡½æ•°ï¼‰
 string SemanticAnalyseVariantReference(_VariantReference* variantReference){
 	if(variantReference==NULL){
 		cout << "[SemanticAnalyseVariantReference] pointer of _VariantReference is null" << endl;
 		return "";
 	}
 	_SymbolRecord* record = findSymbolRecord(currentSymbolTable, variantReference->variantId.first);
-	if (record == NULL) {//Î´¶¨Òå //checked
+	if (record == NULL) {//æœªå®šä¹‰ //checked
 		addUndefinedErrorInformation(variantReference->variantId.first, variantReference->variantId.second);
-		return variantReference->variantType = "error";//ÎŞ·¨ÕÒµ½±äÁ¿ÒıÓÃµÄÀàĞÍ
+		return variantReference->variantType = "error";//æ— æ³•æ‰¾åˆ°å˜é‡å¼•ç”¨çš„ç±»å‹
 	}
-	//Ê×ÏÈ±ØĞëÊÇº¯Êı
-	//×÷Îª×óÖµ±ØĞëÊÇµ±Ç°º¯ÊıÃû
-	//×÷ÎªÓÒÖµÔò¿ÉÒÔÊÇÈÎÒâº¯ÊıÃû£¨µİ¹éµ÷ÓÃÒ²¿ÉÒÔ£©
-	//ÊÇ×óÖµ»¹ÊÇÓÒÖµ¡¢ÊÇ¹ı³Ì»¹ÊÇº¯Êı¡¢ÊÇµ±Ç°·ûºÅ±í¶ÔÓ¦µÄ×Ó³ÌĞòÃû³Æ¡¢»¹ÊÇ±ğµÄ×Ó³ÌĞòÃû³Æ
+	//é¦–å…ˆå¿…é¡»æ˜¯å‡½æ•°
+	//ä½œä¸ºå·¦å€¼å¿…é¡»æ˜¯å½“å‰å‡½æ•°å
+	//ä½œä¸ºå³å€¼åˆ™å¯ä»¥æ˜¯ä»»æ„å‡½æ•°åï¼ˆé€’å½’è°ƒç”¨ä¹Ÿå¯ä»¥ï¼‰
+	//æ˜¯å·¦å€¼è¿˜æ˜¯å³å€¼ã€æ˜¯è¿‡ç¨‹è¿˜æ˜¯å‡½æ•°ã€æ˜¯å½“å‰ç¬¦å·è¡¨å¯¹åº”çš„å­ç¨‹åºåç§°ã€è¿˜æ˜¯åˆ«çš„å­ç¨‹åºåç§°
 
-	if (variantReference->flag == 0) {//Èç¹ûÊÇ·ÇÊı×é
+	if (variantReference->flag == 0) {//å¦‚æœæ˜¯éæ•°ç»„
 		if (record->flag == "(sub)program name") {
-			if (record->subprogramType == "procedure") {//Õâ¸ö°üº¬ÁË²éµ½Ö÷³ÌĞòÃûµÄÇé¿ö
-				//ÕâÀïÓĞ¿ÕµÄ»°£¬×îºÃ°Ñ²éµ½Ö÷³ÌĞòÃûµÄ±¨´íµ¥¶ÀÄÃ³öÀ´ hhh checked
+			if (record->subprogramType == "procedure") {//è¿™ä¸ªåŒ…å«äº†æŸ¥åˆ°ä¸»ç¨‹åºåçš„æƒ…å†µ
+				//è¿™é‡Œæœ‰ç©ºçš„è¯ï¼Œæœ€å¥½æŠŠæŸ¥åˆ°ä¸»ç¨‹åºåçš„æŠ¥é”™å•ç‹¬æ‹¿å‡ºæ¥ hhh checked
 				addGeneralErrorInformation("[Invalid reference] <Line " + to_string(variantReference->variantId.second) + "> Procedure name \"" + record->id + "\" can't be referenced");
 				return variantReference->variantType = "error";
 			}
-			//Èç¹ûÊÇº¯Êı£¬ÄÇÃ´Ò»¶¨ÊÇµ±Ç°·ûºÅ±í
-			//Èç¹ûÊÇ×óÖµ£¬ÄÇÃ´ÊÇ·µ»ØÓï¾ä£¬²»ĞèÒª¹Ø×¢²ÎÊı
-			//Èç¹ûÊÇÓÒÖµ£¬ÄÇÃ´ÊÇµİ¹éµ÷ÓÃ£¬ĞèÒª¹Ø×¢²ÎÊı£¬¼´¼ì²éĞÎÊ½²ÎÊı¸öÊıÊÇ·ñÊÇ0¸ö
-			if (variantReference->locFlag == -1) { //Èç¹ûÊÇ×óÖµ
+			//å¦‚æœæ˜¯å‡½æ•°ï¼Œé‚£ä¹ˆä¸€å®šæ˜¯å½“å‰ç¬¦å·è¡¨
+			//å¦‚æœæ˜¯å·¦å€¼ï¼Œé‚£ä¹ˆæ˜¯è¿”å›è¯­å¥ï¼Œä¸éœ€è¦å…³æ³¨å‚æ•°
+			//å¦‚æœæ˜¯å³å€¼ï¼Œé‚£ä¹ˆæ˜¯é€’å½’è°ƒç”¨ï¼Œéœ€è¦å…³æ³¨å‚æ•°ï¼Œå³æ£€æŸ¥å½¢å¼å‚æ•°ä¸ªæ•°æ˜¯å¦æ˜¯0ä¸ª
+			if (variantReference->locFlag == -1) { //å¦‚æœæ˜¯å·¦å€¼
 				variantReference->kind = "function return reference";
 				return variantReference->variantType = record->type;
 			}
-			//Èç¹ûÊÇÓÒÖµ
-			if (record->amount != 0) {//Èç¹ûĞÎ²Î¸öÊı²»Îª0 checked µİ¹éµ÷ÓÃ
+			//å¦‚æœæ˜¯å³å€¼
+			if (record->amount != 0) {//å¦‚æœå½¢å‚ä¸ªæ•°ä¸ä¸º0 checked é€’å½’è°ƒç”¨
 				addNumberErrorInformation(variantReference->variantId.first, variantReference->variantId.second, 0, record->amount, "function");
 				return variantReference->variantType = record->type;
 			}
-			//Èç¹ûĞÎ²Î¸öÊıÎª0
-			//ÕâÑù¶ÔÓ¦µ½¾ßÌå³ÌĞòÖĞ£¬Êµ¼ÊÉÏÊÇÎŞ²Îº¯ÊıµÄµİ¹éµ÷ÓÃ
+			//å¦‚æœå½¢å‚ä¸ªæ•°ä¸º0
+			//è¿™æ ·å¯¹åº”åˆ°å…·ä½“ç¨‹åºä¸­ï¼Œå®é™…ä¸Šæ˜¯æ— å‚å‡½æ•°çš„é€’å½’è°ƒç”¨
 			variantReference->kind = "function call";
 			return variantReference->variantType = record->type;
 		}
-		if (record->flag == "function") {//Èç¹ûÊÇº¯Êı ÔòÒ»¶¨ÊÇÔÚÖ÷·ûºÅ±íÖĞ²éµ½µÄ
+		if (record->flag == "function") {//å¦‚æœæ˜¯å‡½æ•° åˆ™ä¸€å®šæ˜¯åœ¨ä¸»ç¬¦å·è¡¨ä¸­æŸ¥åˆ°çš„
 			variantReference->kind = "function";
-			//²»ÄÜ×÷Îª×óÖµ£¬±ØĞë×÷ÎªÓÒÖµ£¬ÇÒĞÎ²Î¸öÊı±ØĞëÎª0
-			//±»Ê¶±ğÎªvariantReferenceµÄº¯Êıµ÷ÓÃÒ»¶¨²»º¬Êµ²Î£¬ËùÒÔĞèÒª¼ì²éĞÎ²Î¸öÊı
-			if (variantReference->locFlag == -1) {//Èç¹ûÊÇ×óÖµ checked
+			//ä¸èƒ½ä½œä¸ºå·¦å€¼ï¼Œå¿…é¡»ä½œä¸ºå³å€¼ï¼Œä¸”å½¢å‚ä¸ªæ•°å¿…é¡»ä¸º0
+			//è¢«è¯†åˆ«ä¸ºvariantReferenceçš„å‡½æ•°è°ƒç”¨ä¸€å®šä¸å«å®å‚ï¼Œæ‰€ä»¥éœ€è¦æ£€æŸ¥å½¢å‚ä¸ªæ•°
+			if (variantReference->locFlag == -1) {//å¦‚æœæ˜¯å·¦å€¼ checked
 				addGeneralErrorInformation("[Invalid reference!] <Line " + to_string(variantReference->variantId.second) + "> function name \"" + record->id + "\" can't be referenced as l-value.");
 				return variantReference->variantType = "error";
 			}
-			//Èç¹ûÊÇÓÒÖµ
-			if (record->amount != 0) {//Èç¹ûĞÎ²Î¸öÊı²»Îª0 checked
+			//å¦‚æœæ˜¯å³å€¼
+			if (record->amount != 0) {//å¦‚æœå½¢å‚ä¸ªæ•°ä¸ä¸º0 checked
 				addNumberErrorInformation(variantReference->variantId.first, variantReference->variantId.second, 0, record->amount, "function");
 				return variantReference->variantType = record->type;
 			}
@@ -122,14 +122,14 @@ string SemanticAnalyseVariantReference(_VariantReference* variantReference){
 			variantReference->kind = "constant";
 		return variantReference->variantType = record->type;
 	}
-	else if (variantReference->flag == 1) {//Èç¹ûÊÇÊı×é
-		if (record->flag != "array") {//Èç¹û·ûºÅ±íÖĞ¼ÇÂ¼µÄ²»ÊÇÊı×é checked
+	else if (variantReference->flag == 1) {//å¦‚æœæ˜¯æ•°ç»„
+		if (record->flag != "array") {//å¦‚æœç¬¦å·è¡¨ä¸­è®°å½•çš„ä¸æ˜¯æ•°ç»„ checked
 			addPreFlagErrorInformation(variantReference->variantId.first, variantReference->variantId.second, "array", record->lineNumber, record->flag);
 			return variantReference->variantType = "error";
 		}
 		variantReference->kind = "array";
 		//checked
-		if (variantReference->expressionList.size() != record->amount) {//Èç¹ûÒıÓÃÊ±µÄÏÂ±êÎ¬ÊıºÍ·ûºÅ±íËù´æ²»Ò»ÖÂ
+		if (variantReference->expressionList.size() != record->amount) {//å¦‚æœå¼•ç”¨æ—¶çš„ä¸‹æ ‡ç»´æ•°å’Œç¬¦å·è¡¨æ‰€å­˜ä¸ä¸€è‡´
 			addNumberErrorInformation(variantReference->variantId.first, variantReference->variantId.second, int(variantReference->expressionList.size()), record->amount, "array");
 			variantReference->variantType = "error";
 			return record->type;
@@ -137,12 +137,12 @@ string SemanticAnalyseVariantReference(_VariantReference* variantReference){
 		variantReference->variantType = record->type;
 		for (int i = 0; i < variantReference->expressionList.size(); i++) {
 			string type = SemanticAnalyseExpression(variantReference->expressionList[i]);
-			//¼ì²éÏÂ±ê±í´ïÊ½µÄÀàĞÍÊÇ·ñÊÇÕûĞÍ checked
+			//æ£€æŸ¥ä¸‹æ ‡è¡¨è¾¾å¼çš„ç±»å‹æ˜¯å¦æ˜¯æ•´å‹ checked
 			if (type != "integer") {
 				addExpressionTypeErrorInformation(variantReference->expressionList[i], type, "integer", to_string(i + 1) + "th index of array \"" + variantReference->variantId.first + "\"");
 				variantReference->variantType = "error";
 			}
-			//¼ì²éÔ½½ç checked
+			//æ£€æŸ¥è¶Šç•Œ checked
 			if(variantReference->expressionList[i]->totalIntValueValid){
 				if(!record->checkArrayXthIndexRange(i, variantReference->expressionList[i]->totalIntValue)){
 					addArrayRangeOutOfBoundErrorInformation(variantReference->expressionList[i], variantReference->variantId.first, i, record->arrayRangeList[i]);
@@ -158,58 +158,58 @@ string SemanticAnalyseVariantReference(_VariantReference* variantReference){
 	}
 }
 
-//¶ÔÓï¾ä½øĞĞÓïÒå·ÖÎö
+//å¯¹è¯­å¥è¿›è¡Œè¯­ä¹‰åˆ†æ
 void SemanticAnalyseStatement(_Statement *statement){
 	if(statement==NULL){
 		cout << "[SemanticAnalyseStatement] pointer of _Statement is null" << endl;
 		return;
 	}
     if(statement->type=="compound"){
-        _Compound *compound = reinterpret_cast<_Compound*>(statement);//¶Ô¸´ºÏÓï¾ä¿éÖĞµÄÃ¿Ò»ÌõÓï¾ä½øĞĞÓïÒå·ÖÎö
+        _Compound *compound = reinterpret_cast<_Compound*>(statement);//å¯¹å¤åˆè¯­å¥å—ä¸­çš„æ¯ä¸€æ¡è¯­å¥è¿›è¡Œè¯­ä¹‰åˆ†æ
         for(int i=0;i<compound->statementList.size();i++)
             SemanticAnalyseStatement(compound->statementList[i]);
     }
     else if(statement->type=="repeat"){
         _RepeatStatement *repeatStatement = reinterpret_cast<_RepeatStatement*>(statement);
 		string type = SemanticAnalyseExpression(repeatStatement->condition);
-		if (type != "boolean") {//repeatÓï¾äÀàĞÍ¼ì²é,condition±í´ïÊ½ÀàĞÍ¼ì²é checked
+		if (type != "boolean") {//repeatè¯­å¥ç±»å‹æ£€æŸ¥,conditionè¡¨è¾¾å¼ç±»å‹æ£€æŸ¥ checked
 			addExpressionTypeErrorInformation(repeatStatement->condition, type, "boolean", "condition of repeat-until statement");
 			repeatStatement->statementType = "error";
 		}
 		else
             repeatStatement->statementType="void";
-        SemanticAnalyseStatement(repeatStatement->_do);//¶ÔÑ­»·ÌåÓï¾ä½øĞĞÓïÒå·ÖÎö
+        SemanticAnalyseStatement(repeatStatement->_do);//å¯¹å¾ªç¯ä½“è¯­å¥è¿›è¡Œè¯­ä¹‰åˆ†æ
     }
     else if(statement->type=="while"){
         _WhileStatement *whileStatement = reinterpret_cast<_WhileStatement*>(statement);
 		string type = SemanticAnalyseExpression(whileStatement->condition);
-		if (type != "boolean") {//whileÓï¾äÀàĞÍ¼ì²é,condition±í´ïÊ½ÀàĞÍ¼ì²é checked
+		if (type != "boolean") {//whileè¯­å¥ç±»å‹æ£€æŸ¥,conditionè¡¨è¾¾å¼ç±»å‹æ£€æŸ¥ checked
 			addExpressionTypeErrorInformation(whileStatement->condition, type, "boolean", "condition of while statement");
 			whileStatement->statementType = "error";
 		}
 		else
             whileStatement->statementType="void";
-        SemanticAnalyseStatement(whileStatement->_do);//¶ÔÑ­»·ÌåÓï¾ä½øĞĞÓïÒå·ÖÎö
+        SemanticAnalyseStatement(whileStatement->_do);//å¯¹å¾ªç¯ä½“è¯­å¥è¿›è¡Œè¯­ä¹‰åˆ†æ
     }
     else if(statement->type=="for"){
         _ForStatement *forStatement = reinterpret_cast<_ForStatement*>(statement);
-        //¼ì²éÑ­»·±äÁ¿ÊÇ·ñÒÑ¾­¶¨Òå£¬ÈçÒÑ¾­¶¨Òå£¬ÊÇ·ñÎªintegerĞÍ±äÁ¿
+        //æ£€æŸ¥å¾ªç¯å˜é‡æ˜¯å¦å·²ç»å®šä¹‰ï¼Œå¦‚å·²ç»å®šä¹‰ï¼Œæ˜¯å¦ä¸ºintegerå‹å˜é‡
 		_SymbolRecord *record = findSymbolRecord(currentSymbolTable, forStatement->id.first);
-		if(record==NULL){//Ñ­»·±äÁ¿Î´¶¨Òå£¬´íÎóĞÅÏ¢ checked
+		if(record==NULL){//å¾ªç¯å˜é‡æœªå®šä¹‰ï¼Œé”™è¯¯ä¿¡æ¯ checked
 			addUndefinedErrorInformation(forStatement->id.first, forStatement->id.second);
 			return;
 		}
-		//Èç¹ûÎŞ·¨×÷ÎªÑ­»·±äÁ¿ checked
-		if (!(record->flag == "value parameter" || record->flag == "var parameter" || record->flag == "normal variant")) {//Èç¹ûµ±Ç°·ûºÅÖÖÀà²»¿ÉÄÜ×÷ÎªÑ­»·±äÁ¿
+		//å¦‚æœæ— æ³•ä½œä¸ºå¾ªç¯å˜é‡ checked
+		if (!(record->flag == "value parameter" || record->flag == "var parameter" || record->flag == "normal variant")) {//å¦‚æœå½“å‰ç¬¦å·ç§ç±»ä¸å¯èƒ½ä½œä¸ºå¾ªç¯å˜é‡
 			addPreFlagErrorInformation(forStatement->id.first, forStatement->id.second, "value parameter, var parameter or normal variant", record->lineNumber, record->flag);
 			return;
 		}
-		//Èç¹ûÀàĞÍ²»ÊÇÕûĞÍ checked
+		//å¦‚æœç±»å‹ä¸æ˜¯æ•´å‹ checked
 		if (record->type != "integer") {
 			addUsageTypeErrorInformation(forStatement->id.first, forStatement->id.second, record->type, "cyclic variable of for statement", "integer");
 			return;
 		}
-        //forÓï¾äÀàĞÍ¼ì²é,startºÍend±í´ïÊ½ÀàĞÍ¼ì²é
+        //forè¯­å¥ç±»å‹æ£€æŸ¥,startå’Œendè¡¨è¾¾å¼ç±»å‹æ£€æŸ¥
 		forStatement->statementType = "void";
 		string type = SemanticAnalyseExpression(forStatement->start);
 		if (type != "integer") { //checked
@@ -221,37 +221,37 @@ void SemanticAnalyseStatement(_Statement *statement){
 			addExpressionTypeErrorInformation(forStatement->end, type, "integer", "end value of for statement");
 			forStatement->statementType = "error";
 		}
-        //¶ÔÑ­»·ÌåÓï¾ä½øĞĞÓïÒå·ÖÎö
+        //å¯¹å¾ªç¯ä½“è¯­å¥è¿›è¡Œè¯­ä¹‰åˆ†æ
         SemanticAnalyseStatement(forStatement->_do);
     }
     else if(statement->type=="if"){
         _IfStatement *ifStatement = reinterpret_cast<_IfStatement*>(statement);
 		string type = SemanticAnalyseExpression(ifStatement->condition);
-		if (type != "boolean") {//ifÓï¾äÀàĞÍ¼ì²é,condition±í´ïÊ½ÀàĞÍ¼ì²é checked
+		if (type != "boolean") {//ifè¯­å¥ç±»å‹æ£€æŸ¥,conditionè¡¨è¾¾å¼ç±»å‹æ£€æŸ¥ checked
 			addExpressionTypeErrorInformation(ifStatement->condition, type, "boolean", "condition of if statement");
 			ifStatement->statementType = "error";
 		}
 		else
             ifStatement->statementType="void";
-        SemanticAnalyseStatement(ifStatement->then);//¶ÔthenÓï¾ä½øĞĞÓïÒå·ÖÎö
-        if(ifStatement->els!=NULL)//¶ÔelseÓï¾ä½øĞĞÓï¾ä·ÖÎö
+        SemanticAnalyseStatement(ifStatement->then);//å¯¹thenè¯­å¥è¿›è¡Œè¯­ä¹‰åˆ†æ
+        if(ifStatement->els!=NULL)//å¯¹elseè¯­å¥è¿›è¡Œè¯­å¥åˆ†æ
             SemanticAnalyseStatement(ifStatement->els);
     }
-    else if(statement->type=="assign"){//×óÖµÌØÅĞ
+    else if(statement->type=="assign"){//å·¦å€¼ç‰¹åˆ¤
         _AssignStatement *assignStatement = reinterpret_cast<_AssignStatement*>(statement);
-        //¶Ô×óÖµ±äÁ¿ÒıÓÃ½øĞĞÓïÒå·ÖÎö,»ñµÃleftType
+        //å¯¹å·¦å€¼å˜é‡å¼•ç”¨è¿›è¡Œè¯­ä¹‰åˆ†æ,è·å¾—leftType
 		assignStatement->statementType = "void";
-		assignStatement->variantReference->locFlag = -1;//±ê¼ÇÎª×óÖµ
+		assignStatement->variantReference->locFlag = -1;//æ ‡è®°ä¸ºå·¦å€¼
         string leftType = SemanticAnalyseVariantReference(assignStatement->variantReference);
 		if (assignStatement->variantReference->kind == "constant") {
-			//×óÖµ²»ÄÜÎª³£Á¿ checked
+			//å·¦å€¼ä¸èƒ½ä¸ºå¸¸é‡ checked
 			addGeneralErrorInformation("[Constant as l-value error!] <Line" + to_string(assignStatement->variantReference->variantId.second) + "> Costant \"" + assignStatement->variantReference->variantId.first + "\" can't be referenced as l-value.");
 			return;
 		}
-		//¶ÔÓÒÖµ±í´ïÊ½½øĞĞÀàĞÍ¼ì²é,»ñµÃrightType
+		//å¯¹å³å€¼è¡¨è¾¾å¼è¿›è¡Œç±»å‹æ£€æŸ¥,è·å¾—rightType
         string rightType = SemanticAnalyseExpression(assignStatement->expression);
-		if (assignStatement->variantReference->kind == "function return reference") {//Èç¹ûÊÇ·µ»ØÖµÓï¾ä
-			//Ğè¼ì²é·µ»ØÖµ±í´ïÊ½ÊÇ·ñºÍº¯Êı·µ»ØÖµÀàĞÍÒ»ÖÂ
+		if (assignStatement->variantReference->kind == "function return reference") {//å¦‚æœæ˜¯è¿”å›å€¼è¯­å¥
+			//éœ€æ£€æŸ¥è¿”å›å€¼è¡¨è¾¾å¼æ˜¯å¦å’Œå‡½æ•°è¿”å›å€¼ç±»å‹ä¸€è‡´
 			if (assignStatement->variantReference->variantType != rightType && !(assignStatement->variantReference->variantType=="real" and rightType=="integer")) {
 				//checked
 				addGeneralErrorInformation("[Return type of funciton mismatch!] <Line " + to_string(assignStatement->expression->lineNumber) + "> The type of return expression is " + rightType + " ,but not " + assignStatement->variantReference->variantType + " as function \"" + assignStatement->variantReference->variantId.first + "\" defined.");
@@ -260,7 +260,7 @@ void SemanticAnalyseStatement(_Statement *statement){
 			assignStatement->isReturnStatement = true;
 			return;
 		}
-        //±È½Ï×óÖµºÍÓÒÖµÀàĞÍ,»ñµÃ¸³ÖµÓï¾äµÄÀàĞÍ£»ÀàĞÍ²»Í¬Ê±£¬Ö»Ö§³ÖÕûĞÍµ½ÊµĞÍµÄÒşÊ½×ª»»
+        //æ¯”è¾ƒå·¦å€¼å’Œå³å€¼ç±»å‹,è·å¾—èµ‹å€¼è¯­å¥çš„ç±»å‹ï¼›ç±»å‹ä¸åŒæ—¶ï¼Œåªæ”¯æŒæ•´å‹åˆ°å®å‹çš„éšå¼è½¬æ¢
 		if (leftType != rightType && !(leftType=="real" && rightType=="integer")) {
 			//checked
 			addAssignTypeMismatchErrorInformation(assignStatement->variantReference, assignStatement->expression);
@@ -269,47 +269,47 @@ void SemanticAnalyseStatement(_Statement *statement){
 		else
 			assignStatement->statementType = "void";
     }
-    else if(statement->type=="procedure"){//readµÄ²ÎÊıÖ»ÄÜÊÇ±äÁ¿»òÊı×éÔªËØ;
+    else if(statement->type=="procedure"){//readçš„å‚æ•°åªèƒ½æ˜¯å˜é‡æˆ–æ•°ç»„å…ƒç´ ;
         _ProcedureCall *procedureCall = reinterpret_cast<_ProcedureCall*>(statement);
-        //Í¨¹ıprocedureId²é±í£¬»ñµÃ²ÎÊı¸öÊı¡¢²ÎÊıÀàĞÍµÈĞÅÏ¢
+        //é€šè¿‡procedureIdæŸ¥è¡¨ï¼Œè·å¾—å‚æ•°ä¸ªæ•°ã€å‚æ•°ç±»å‹ç­‰ä¿¡æ¯
 		//www
 		//_SymbolRecord *record = findSymbolRecord(currentSymbolTable, procedureCall->procedureId.first);
 		_SymbolRecord *record = findSymbolRecord(mainSymbolTable, procedureCall->procedureId.first);
 		if (record == NULL)
 			record = findSymbolRecord(currentSymbolTable, procedureCall->procedureId.first, 1);
 		procedureCall->statementType = "void";
-		if (record == NULL) {//Î´¶¨Òå checked
+		if (record == NULL) {//æœªå®šä¹‰ checked
 			addUndefinedErrorInformation(procedureCall->procedureId.first, procedureCall->procedureId.second);
 			procedureCall->statementType = "error";
 			return;
 		}
-		if (record->flag != "procedure") {//Èç¹û²»ÊÇ¹ı³Ì checked
+		if (record->flag != "procedure") {//å¦‚æœä¸æ˜¯è¿‡ç¨‹ checked
 			addPreFlagErrorInformation(procedureCall->procedureId.first, procedureCall->procedureId.second, "procedure", record->lineNumber, record->flag);
 			procedureCall->statementType = "error";
 			return;
 		}
 		if (record->id == "exit") {
-			/*exit¼È¿ÉÒÔ³öÏÖÔÚ¹ı³ÌÖĞ£¬Ò²¿ÉÒÔ³öÏÖÔÚº¯ÊıÖĞ£¬³öÏÖÔÚ¹ı³ÌÖĞÊ±£¬
-			exit²»ÄÜ´ø²ÎÊı£¬³öÏÖÔÚº¯ÊıÖĞÊ±£¬exitÖ»ÄÜ´øÒ»¸ö²ÎÊı£¬
-			ÇÒ¸Ã²ÎÊı±í´ïÊ½µÄÀàĞÍ±ØĞëºÍº¯ÊıµÄ·µ»ØÖµÀàĞÍÒ»ÖÂ*/
-			//ËùÒÔĞèÅĞ¶Ïµ±Ç°³ÌĞòÊÇ¹ı³Ì»¹ÊÇº¯Êı
-			if (currentSymbolTable->recordList[0]->subprogramType == "procedure") {//Èç¹ûÊÇ¹ı³Ì
-				//exit²»ÄÜ´ø²ÎÊı±í´ïÊ½
-				if (procedureCall->actualParaList.size() != 0) {//Èç¹ûÊµ²Î¸öÊı²»Îª0 checked
+			/*exitæ—¢å¯ä»¥å‡ºç°åœ¨è¿‡ç¨‹ä¸­ï¼Œä¹Ÿå¯ä»¥å‡ºç°åœ¨å‡½æ•°ä¸­ï¼Œå‡ºç°åœ¨è¿‡ç¨‹ä¸­æ—¶ï¼Œ
+			exitä¸èƒ½å¸¦å‚æ•°ï¼Œå‡ºç°åœ¨å‡½æ•°ä¸­æ—¶ï¼Œexitåªèƒ½å¸¦ä¸€ä¸ªå‚æ•°ï¼Œ
+			ä¸”è¯¥å‚æ•°è¡¨è¾¾å¼çš„ç±»å‹å¿…é¡»å’Œå‡½æ•°çš„è¿”å›å€¼ç±»å‹ä¸€è‡´*/
+			//æ‰€ä»¥éœ€åˆ¤æ–­å½“å‰ç¨‹åºæ˜¯è¿‡ç¨‹è¿˜æ˜¯å‡½æ•°
+			if (currentSymbolTable->recordList[0]->subprogramType == "procedure") {//å¦‚æœæ˜¯è¿‡ç¨‹
+				//exitä¸èƒ½å¸¦å‚æ•°è¡¨è¾¾å¼
+				if (procedureCall->actualParaList.size() != 0) {//å¦‚æœå®å‚ä¸ªæ•°ä¸ä¸º0 checked
 					addGeneralErrorInformation("[Return value redundancy!] <Line " + to_string(procedureCall->procedureId.second) + "> Number of return value of procedure must be 0, that is, exit must have no actual parameters.");
 					procedureCall->statementType = "error";
 				}
 				return;
 			}
-			//Èç¹ûÊÇº¯Êı
-			if (procedureCall->actualParaList.size() != 1) {//Èç¹ûÊµ²Î¸öÊı²»Îª1
+			//å¦‚æœæ˜¯å‡½æ•°
+			if (procedureCall->actualParaList.size() != 1) {//å¦‚æœå®å‚ä¸ªæ•°ä¸ä¸º1
 				if (procedureCall->actualParaList.size() == 0) //checked
 					addGeneralErrorInformation("[Return value missing!] <Line " + to_string(procedureCall->procedureId.second) + "> Number of return value of function must be 1, that is, exit must have 1 actual parameters.");
 				else //checked
 					addGeneralErrorInformation("[Return value redundancy!] <Line " + to_string(procedureCall->procedureId.second) + "> Number of return value of function must be 1, that is, exit must have 1 actual parameters.");
 				return;
 			}
-			//Èç¹ûÊµ²Î¸öÊıÎª1£¬¼ì²éÊµ²Î±í´ïÊ½µÄÀàĞÍ£¬¼ì²éÊÇ·ñÓëº¯Êı·µ»ØÖµÀàĞÍÒ»ÖÂ
+			//å¦‚æœå®å‚ä¸ªæ•°ä¸º1ï¼Œæ£€æŸ¥å®å‚è¡¨è¾¾å¼çš„ç±»å‹ï¼Œæ£€æŸ¥æ˜¯å¦ä¸å‡½æ•°è¿”å›å€¼ç±»å‹ä¸€è‡´
 			string returnType=SemanticAnalyseExpression(procedureCall->actualParaList[0]);
 			if (currentSymbolTable->recordList[0]->type != returnType && !(currentSymbolTable->recordList[0]->type == "real" && returnType=="integer")) { 
 				//checked
@@ -320,14 +320,14 @@ void SemanticAnalyseStatement(_Statement *statement){
 			return;
 		}
 		if (record->id == "read" || record->id == "write") {
-			if (procedureCall->actualParaList.size() == 0) { //read¡¢writeµÄ²ÎÊı¸öÊı²»ÄÜÎª0 checked
+			if (procedureCall->actualParaList.size() == 0) { //readã€writeçš„å‚æ•°ä¸ªæ•°ä¸èƒ½ä¸º0 checked
 				string tmp = record->id;
 				tmp[0] -= 'a' - 'A';
 				addGeneralErrorInformation("[" + tmp + " actual parameter missing!] <Line " + to_string(procedureCall->procedureId.second) + "> procedure \"" + record->id + "\" must have at least one actual parameter.");
 				procedureCall->statementType = "error";
 			}
 		}
-		if (record->id == "read") {//²ÎÊıÖ»ÄÜÊÇ±äÁ¿»òÊı×éÔªËØ£¬²»ÄÜÊÇ³£Á¿¡¢±í´ïÊ½µÈ
+		if (record->id == "read") {//å‚æ•°åªèƒ½æ˜¯å˜é‡æˆ–æ•°ç»„å…ƒç´ ï¼Œä¸èƒ½æ˜¯å¸¸é‡ã€è¡¨è¾¾å¼ç­‰
 			for (int i = 0; i < procedureCall->actualParaList.size(); i++) {
 				string actualType = SemanticAnalyseExpression(procedureCall->actualParaList[i]);
 				//checked
@@ -340,7 +340,7 @@ void SemanticAnalyseStatement(_Statement *statement){
 			}
 			return;
 		}
-		if (record->amount == -1) {//Èç¹ûÊÇ±ä²Î¹ı³Ì£¨±¾±àÒëÆ÷Éæ¼°µÄ±ä²Î¹ı³Ì(³ıÁËread)¶Ô²ÎÊıÀàĞÍÃ»ÓĞÒªÇó£¬µ«²»ÄÜÎªerror£©
+		if (record->amount == -1) {//å¦‚æœæ˜¯å˜å‚è¿‡ç¨‹ï¼ˆæœ¬ç¼–è¯‘å™¨æ¶‰åŠçš„å˜å‚è¿‡ç¨‹(é™¤äº†read)å¯¹å‚æ•°ç±»å‹æ²¡æœ‰è¦æ±‚ï¼Œä½†ä¸èƒ½ä¸ºerrorï¼‰
 			for (int i = 0; i < procedureCall->actualParaList.size(); i++) {
 				string actualType = SemanticAnalyseExpression(procedureCall->actualParaList[i]);
 				if (actualType == "error")
@@ -353,26 +353,26 @@ void SemanticAnalyseStatement(_Statement *statement){
 			procedureCall->statementType = "error";
 			return;
 		}
-		// ĞÎ²ÎÔÚ·ûºÅ±íÖĞµÄ¶¨Î»
-		for (int i = 0; i < procedureCall->actualParaList.size(); i++) {//¼ì²éactualParaList¸÷±í´ïÊ½µÄÀàĞÍ£¬¼ì²éÊµ²ÎºÍĞÎ²ÎµÄÀàĞÍÒ»ÖÂĞÔ
+		// å½¢å‚åœ¨ç¬¦å·è¡¨ä¸­çš„å®šä½
+		for (int i = 0; i < procedureCall->actualParaList.size(); i++) {//æ£€æŸ¥actualParaListå„è¡¨è¾¾å¼çš„ç±»å‹ï¼Œæ£€æŸ¥å®å‚å’Œå½¢å‚çš„ç±»å‹ä¸€è‡´æ€§
 			string actualType = SemanticAnalyseExpression(procedureCall->actualParaList[i]);
 			string formalType = record->findXthFormalParaType(i + 1);
 			bool isRefered = record->isXthFormalParaRefered(i + 1);
 			if (isRefered && !(procedureCall->actualParaList[i]->type == "var" && (procedureCall->actualParaList[i]->variantReference->kind == "var" || procedureCall->actualParaList[i]->variantReference->kind == "array"))) {
-				//¸Ã±í´ïÊ½²»ÄÜ×÷ÎªÒıÓÃĞÎ²Î¶ÔÓ¦µÄÊµ²Î checked
-				addGeneralErrorInformation("[Referenced actual parameter error!] <Line " + to_string(procedureCall->actualParaList[i]->lineNumber) + "> The " + to_string(i + 1) + "th actual parameter expression should be a normal variable¡¢value parameter¡¢referenced parameter or array element.");
+				//è¯¥è¡¨è¾¾å¼ä¸èƒ½ä½œä¸ºå¼•ç”¨å½¢å‚å¯¹åº”çš„å®å‚ checked
+				addGeneralErrorInformation("[Referenced actual parameter error!] <Line " + to_string(procedureCall->actualParaList[i]->lineNumber) + "> The " + to_string(i + 1) + "th actual parameter expression should be a normal variableã€value parameterã€referenced parameter or array element.");
 				continue;
 			}
 			//if(isRefered && procedureCall->actualParaList[i]->type==)
-			if (!isRefered) { //´«Öµ²ÎÊıÖ§³Öintegerµ½realµÄÒşÊ½ÀàĞÍ×ª»»
-				if (actualType != formalType && !(actualType == "integer" && formalType == "real")) { //Èç¹ûÀàĞÍ²»Ò»ÖÂ
+			if (!isRefered) { //ä¼ å€¼å‚æ•°æ”¯æŒintegeråˆ°realçš„éšå¼ç±»å‹è½¬æ¢
+				if (actualType != formalType && !(actualType == "integer" && formalType == "real")) { //å¦‚æœç±»å‹ä¸ä¸€è‡´
 				    //checked
 					addExpressionTypeErrorInformation(procedureCall->actualParaList[i], actualType, formalType, to_string(i + 1) + "th actual parameter of procedure call of \"" + procedureCall->procedureId.first + "\"");
 					procedureCall->statementType = "error";
 				}
 			}
-			else { //ÒıÓÃ²ÎÊıĞè±£³ÖÀàĞÍÇ¿Ò»ÖÂ
-				if (actualType != formalType) { //Èç¹ûÀàĞÍ²»Ò»ÖÂ
+			else { //å¼•ç”¨å‚æ•°éœ€ä¿æŒç±»å‹å¼ºä¸€è‡´
+				if (actualType != formalType) { //å¦‚æœç±»å‹ä¸ä¸€è‡´
 				    //checked
 					addExpressionTypeErrorInformation(procedureCall->actualParaList[i], actualType, formalType, to_string(i + 1) + "th actual parameter of procedure call of \"" + procedureCall->procedureId.first + "\"");
 					procedureCall->statementType = "error";
@@ -386,35 +386,35 @@ void SemanticAnalyseStatement(_Statement *statement){
 	}
 }
 
-//¶ÔĞÎÊ½²ÎÊı½øĞĞÓïÒå·ÖÎö£¬ĞÎÊ½²ÎÊıÒ»¶¨ÊÇ»ù±¾ÀàĞÍ
+//å¯¹å½¢å¼å‚æ•°è¿›è¡Œè¯­ä¹‰åˆ†æï¼Œå½¢å¼å‚æ•°ä¸€å®šæ˜¯åŸºæœ¬ç±»å‹
 void SemanticAnalyseFormalParameter(_FormalParameter* formalParameter){
 	if(formalParameter==NULL){
 		cout << "[SemanticAnalyseFormalParameter] pointer of _FormalParameter is null" << endl;
 		return;
 	}
-	//¼ì²éÊÇ·ñÓë¿â³ÌĞòÃû¡¢Ö÷³ÌĞòÃû¡¢Ö÷³ÌĞò²ÎÊıÍ¬Ãû
+	//æ£€æŸ¥æ˜¯å¦ä¸åº“ç¨‹åºåã€ä¸»ç¨‹åºåã€ä¸»ç¨‹åºå‚æ•°åŒå
 	//if (checkIsTheSameAsKey(formalParameter->paraId.first, formalParameter->paraId.second))
 		//return;
 	_SymbolRecord *record = findSymbolRecord(currentSymbolTable, formalParameter->paraId.first, 1);
 	if (!checkIsTheSameAsKey(formalParameter->paraId.first, formalParameter->paraId.second)) {
-		if (record != NULL) //Èç¹ûÖØ¶¨Òå
+		if (record != NULL) //å¦‚æœé‡å®šä¹‰
 			addDuplicateDefinitionErrorInformation(record->id, record->lineNumber, record->flag, record->type, formalParameter->paraId.second);
 	}
-	//¼ì²éÊÇ·ñÓëµ±Ç°³ÌĞòÃûÒÔ¼°ÔÚÕâÖ®Ç°¶¨ÒåµÄĞÎ²ÎÍ¬Ãû£¬Èç¹ûÍ¬Ãû£¬Ìí¼ÓÏÂ»®Ïß½øĞĞ»Ö¸´£¨ÔÚaddº¯ÊıÖĞ½øĞĞ£©
+	//æ£€æŸ¥æ˜¯å¦ä¸å½“å‰ç¨‹åºåä»¥åŠåœ¨è¿™ä¹‹å‰å®šä¹‰çš„å½¢å‚åŒåï¼Œå¦‚æœåŒåï¼Œæ·»åŠ ä¸‹åˆ’çº¿è¿›è¡Œæ¢å¤ï¼ˆåœ¨addå‡½æ•°ä¸­è¿›è¡Œï¼‰
 	if(formalParameter->flag==0)
 		currentSymbolTable->addPara(formalParameter->paraId.first, formalParameter->paraId.second, formalParameter->type);
 	else
 		currentSymbolTable->addVarPara(formalParameter->paraId.first, formalParameter->paraId.second, formalParameter->type);
 }
 
-//¶Ô×Ó³ÌĞò¶¨Òå½øĞĞÓïÒå·ÖÎö
+//å¯¹å­ç¨‹åºå®šä¹‰è¿›è¡Œè¯­ä¹‰åˆ†æ
 void SemanticAnalyseSubprogramDefinition(_FunctionDefinition* functionDefinition){
 	if(functionDefinition==NULL){
 		cout << "[SemanticAnalyseSubprogramDefinition] pointer of _FunctionDefinition is null" << endl;
 		return;
 	}
 	_SymbolRecord *record=findSymbolRecord(currentSymbolTable, functionDefinition->functionID.first, 1);
-	if(record!=NULL){//ÖØ¶¨Òå checked
+	if(record!=NULL){//é‡å®šä¹‰ checked
 		addDuplicateDefinitionErrorInformation(record->id, record->lineNumber, record->flag, record->type, functionDefinition->functionID.second);
 		return;
 	}
@@ -423,91 +423,91 @@ void SemanticAnalyseSubprogramDefinition(_FunctionDefinition* functionDefinition
 		subprogramType = "procedure";
 	else
 		subprogramType = "function";
-    createSubSymbolTableAndInit();//´´½¨²¢¶¨Î»µ½×Ó±í
-	//½«×Ó³ÌĞòÃûµÈĞÅÏ¢Ìí¼Óµ½×Ó·ûºÅ±íÖĞ
+    createSubSymbolTableAndInit();//åˆ›å»ºå¹¶å®šä½åˆ°å­è¡¨
+	//å°†å­ç¨‹åºåç­‰ä¿¡æ¯æ·»åŠ åˆ°å­ç¬¦å·è¡¨ä¸­
 	currentSymbolTable->addProgramName(functionDefinition->functionID.first, functionDefinition->functionID.second, subprogramType, int(functionDefinition->formalParaList.size()), functionDefinition->type.first);
 	
-	//¸ù¾İtypeÊÇ·ñÎªNULL£¬·ÖÎªaddProcedure()ºÍaddFunction()£¬Ìí¼Óµ½Ö÷³ÌĞò±íÖĞ
-	if (functionDefinition->type.first=="")//Èç¹ûÊÇ¹ı³Ì
+	//æ ¹æ®typeæ˜¯å¦ä¸ºNULLï¼Œåˆ†ä¸ºaddProcedure()å’ŒaddFunction()ï¼Œæ·»åŠ åˆ°ä¸»ç¨‹åºè¡¨ä¸­
+	if (functionDefinition->type.first=="")//å¦‚æœæ˜¯è¿‡ç¨‹
 		mainSymbolTable->addProcedure(functionDefinition->functionID.first, functionDefinition->functionID.second, int(functionDefinition->formalParaList.size()), currentSymbolTable);
-	else//Èç¹ûÊÇº¯Êı
+	else//å¦‚æœæ˜¯å‡½æ•°
 		mainSymbolTable->addFunction(functionDefinition->functionID.first, functionDefinition->functionID.second, functionDefinition->type.first, int(functionDefinition->formalParaList.size()), currentSymbolTable);
 	
-	//¶ÔĞÎÊ½²ÎÊıÁĞ±í½øĞĞÓïÒå·ÖÎö£¬²¢½«ĞÎÊ½²ÎÊıÌí¼Óµ½×Ó·ûºÅ±íÖĞ
+	//å¯¹å½¢å¼å‚æ•°åˆ—è¡¨è¿›è¡Œè¯­ä¹‰åˆ†æï¼Œå¹¶å°†å½¢å¼å‚æ•°æ·»åŠ åˆ°å­ç¬¦å·è¡¨ä¸­
 	for(int i=0;i<functionDefinition->formalParaList.size();i++)
 		SemanticAnalyseFormalParameter(functionDefinition->formalParaList[i]);
-	//¶Ô³£Á¿¶¨Òå½øĞĞÓïÒå·ÖÎö
+	//å¯¹å¸¸é‡å®šä¹‰è¿›è¡Œè¯­ä¹‰åˆ†æ
 	for (int i = 0; i<functionDefinition->constList.size(); i++)
 		SemanticAnalyseConst(functionDefinition->constList[i]);
-    //¶Ô±äÁ¿¶¨Òå½øĞĞÓïÒå·ÖÎö
+    //å¯¹å˜é‡å®šä¹‰è¿›è¡Œè¯­ä¹‰åˆ†æ
 	for (int i = 0; i<functionDefinition->variantList.size(); i++)
 		SemanticAnalyseVariant(functionDefinition->variantList[i]);
-    //¶Ôcompound½øĞĞÓïÒå·ÖÎö
+    //å¯¹compoundè¿›è¡Œè¯­ä¹‰åˆ†æ
 	SemanticAnalyseStatement(reinterpret_cast<_Statement*>(functionDefinition->compound));
-	//¶Ôº¯Êı½øĞĞ·µ»ØÖµÓï¾äµÄ´æÔÚĞÔ¼ì²é
+	//å¯¹å‡½æ•°è¿›è¡Œè¿”å›å€¼è¯­å¥çš„å­˜åœ¨æ€§æ£€æŸ¥
 	if (functionDefinition->type.first != "") //checked
 		returnExistedCheckFunctionDefinition(functionDefinition);
 }
 
-//¶Ô±äÁ¿¶¨Òå½øĞĞÓïÒå·ÖÎö
+//å¯¹å˜é‡å®šä¹‰è¿›è¡Œè¯­ä¹‰åˆ†æ
 void SemanticAnalyseVariant(_Variant* variant){
 	if(variant==NULL){
 		cout << "[SemanticAnalyseVariant] pointer of _Variant is null" << endl;
 		return;
 	}
-    _SymbolRecord* record=findSymbolRecord(currentSymbolTable, variant->variantId.first, 1);//ÓÃvariantId.firstÈ¥²é·ûºÅ±í£¬¼ì²éÊÇ·ñÖØ¶¨Òå
+    _SymbolRecord* record=findSymbolRecord(currentSymbolTable, variant->variantId.first, 1);//ç”¨variantId.firstå»æŸ¥ç¬¦å·è¡¨ï¼Œæ£€æŸ¥æ˜¯å¦é‡å®šä¹‰
 	if (checkIsTheSameAsKey(variant->variantId.first, variant->variantId.second))
 		return;
-	if (record != NULL){//Èç¹ûÖØ¶¨Òå checked
+	if (record != NULL){//å¦‚æœé‡å®šä¹‰ checked
 		addDuplicateDefinitionErrorInformation(record->id, record->lineNumber, record->flag, record->type, variant->variantId.second);
 		return;
 	}
-	if(variant->type->flag==0)//Èç¹ûÊÇÆÕÍ¨±äÁ¿
+	if(variant->type->flag==0)//å¦‚æœæ˜¯æ™®é€šå˜é‡
 		currentSymbolTable->addVar(variant->variantId.first, variant->variantId.second, variant->type->type.first);
-	else {//Èç¹ûÊÇÊı×é
-		//Êı×é¶¨ÒåÊ±£¬ÉÏÏÂ½çµÄÏŞÖÆÊÇÉÏ½ç±ØĞë´óÓÚµÈÓÚÏÂ½ç£»°´ÕÕÎÄ·¨¶¨Òå£¬ÉÏÏÂ½ç¾ùÎªÎŞ·ûºÅÊı£¬ÇÒÍ¨¹ıÁËÓï·¨·ÖÎö£¬¾ÍÒ»¶¨ÊÇÎŞ·ûºÅÊı
+	else {//å¦‚æœæ˜¯æ•°ç»„
+		//æ•°ç»„å®šä¹‰æ—¶ï¼Œä¸Šä¸‹ç•Œçš„é™åˆ¶æ˜¯ä¸Šç•Œå¿…é¡»å¤§äºç­‰äºä¸‹ç•Œï¼›æŒ‰ç…§æ–‡æ³•å®šä¹‰ï¼Œä¸Šä¸‹ç•Œå‡ä¸ºæ— ç¬¦å·æ•°ï¼Œä¸”é€šè¿‡äº†è¯­æ³•åˆ†æï¼Œå°±ä¸€å®šæ˜¯æ— ç¬¦å·æ•°
 		vector< pair<int, int> > &tmp = variant->type->arrayRangeList;
 		for (int i = 0; i < tmp.size(); i++) {
 			if (tmp[i].first > tmp[i].second) { //checked
 				addArrayRangeUpSideDownErrorInformation(variant->variantId.first, variant->variantId.second, i + 1, tmp[i].first, tmp[i].second);
-				tmp[i].second = tmp[i].first; //Èç¹ûÉÏ½çĞ¡ÓÚÏÂ½ç£¬½«ÉÏ½çÉèÖÃÎªÏÂ½ç
+				tmp[i].second = tmp[i].first; //å¦‚æœä¸Šç•Œå°äºä¸‹ç•Œï¼Œå°†ä¸Šç•Œè®¾ç½®ä¸ºä¸‹ç•Œ
 			}
 		}
 		currentSymbolTable->addArray(variant->variantId.first, variant->variantId.second, variant->type->type.first, int(variant->type->arrayRangeList.size()), variant->type->arrayRangeList);
 	}
 }
 
-//¶Ô³£Á¿¶¨Òå½øĞĞÓïÒå·ÖÎö
+//å¯¹å¸¸é‡å®šä¹‰è¿›è¡Œè¯­ä¹‰åˆ†æ
 void SemanticAnalyseConst(_Constant* constant){
 	if(constant==NULL){
 		cout << "[SemanticAnalyseConst] pointer of _Constant is null" << endl;
 		return;
 	}
-    //ÓÃconstId.firstÈ¥²é·ûºÅ±í£¬¼ì²éÊÇ·ñÖØ¶¨Òå 
+    //ç”¨constId.firstå»æŸ¥ç¬¦å·è¡¨ï¼Œæ£€æŸ¥æ˜¯å¦é‡å®šä¹‰ 
     _SymbolRecord* record=findSymbolRecord(currentSymbolTable, constant->constId.first, 1);
 	if (checkIsTheSameAsKey(constant->constId.first, constant->constId.second))
 		return;
-	if (record != NULL) {//ÖØ¶¨Òå checked
+	if (record != NULL) {//é‡å®šä¹‰ checked
 		addDuplicateDefinitionErrorInformation(record->id, record->lineNumber, record->flag, record->type, constant->constId.second);
 		return;
 	}
-    if(constant->type=="id"){ //Èç¹û¸Ã³£Á¿ÓÉÁíÍâµÄ³£Á¿±êÊ¶·û¶¨Òå
+    if(constant->type=="id"){ //å¦‚æœè¯¥å¸¸é‡ç”±å¦å¤–çš„å¸¸é‡æ ‡è¯†ç¬¦å®šä¹‰
         _SymbolRecord* preRecord=findSymbolRecord(currentSymbolTable, constant->valueId.first);
-		if(preRecord==NULL){//Î´¶¨Òå checked
+		if(preRecord==NULL){//æœªå®šä¹‰ checked
 			addUndefinedErrorInformation(constant->valueId.first, constant->valueId.second);
 			return;
 		}
-		if (preRecord->flag != "constant") {//Èç¹û²»ÊÇ³£Á¿ checked
+		if (preRecord->flag != "constant") {//å¦‚æœä¸æ˜¯å¸¸é‡ checked
 			addPreFlagErrorInformation(constant->valueId.first, constant->valueId.second, "constant", preRecord->lineNumber, preRecord->flag);
 			return;
 		}
 		currentSymbolTable->addConst(constant->constId.first, constant->constId.second, preRecord->type, constant->isMinusShow^preRecord->isMinusShow, preRecord->value);
     }
-    else//¸Ã³£Á¿ÓÉ³£ÊıÖµ¶¨Òå
+    else//è¯¥å¸¸é‡ç”±å¸¸æ•°å€¼å®šä¹‰
         currentSymbolTable->addConst(constant->constId.first, constant->constId.second, constant->type, constant->isMinusShow, constant->strOfVal);
 }
 
-//¶Ô·Ö³ÌĞò½øĞĞÓïÒå·ÖÎö
+//å¯¹åˆ†ç¨‹åºè¿›è¡Œè¯­ä¹‰åˆ†æ
 void SemanticAnalyseSubprogram(_SubProgram* subprogram){
 	if(subprogram==NULL){
 		cout << "[SemanticAnalyseSubprogram] pointer of _Subprogram is null" << endl;
@@ -519,7 +519,7 @@ void SemanticAnalyseSubprogram(_SubProgram* subprogram){
         SemanticAnalyseVariant(subprogram->variantList[i]);
 	for (int i = 0; i < subprogram->subprogramDefinitionList.size(); i++) {
 		SemanticAnalyseSubprogramDefinition(subprogram->subprogramDefinitionList[i]);
-		currentSymbolTable = mainSymbolTable;//·ûºÅ±íÖØ¶¨Î»
+		currentSymbolTable = mainSymbolTable;//ç¬¦å·è¡¨é‡å®šä½
 	}
     SemanticAnalyseStatement(reinterpret_cast<_Statement*>(subprogram->compound));
 }
@@ -534,38 +534,38 @@ string SemanticAnalyseFunctionCall(_FunctionCall *functionCall) {
 	_SymbolRecord *record = findSymbolRecord(mainSymbolTable, functionCall->functionId.first);
 	if (record == NULL)
 		record = findSymbolRecord(currentSymbolTable, functionCall->functionId.first, 1);
-	if (record == NULL) {//Î´¶¨Òå checked
+	if (record == NULL) {//æœªå®šä¹‰ checked
 		addUndefinedErrorInformation(functionCall->functionId.first, functionCall->functionId.second);
 		return functionCall->returnType = "error";
 	}
-	if (record->flag != "function") {//²»ÊÇº¯Êı checked
+	if (record->flag != "function") {//ä¸æ˜¯å‡½æ•° checked
 		addPreFlagErrorInformation(functionCall->functionId.first, functionCall->functionId.second, "function", record->lineNumber, record->flag);
 		return functionCall->returnType = "error";
 	}
-	if (record->amount == -1) {//Èç¹ûÊÇ±ä²Îº¯Êı£¨±¾±àÒëÆ÷Éæ¼°µÄ±ä²Îº¯Êı¶Ô²ÎÊıÀàĞÍÃ»ÓĞÒªÇó£¬µ«²»ÄÜÎªerror£©
+	if (record->amount == -1) {//å¦‚æœæ˜¯å˜å‚å‡½æ•°ï¼ˆæœ¬ç¼–è¯‘å™¨æ¶‰åŠçš„å˜å‚å‡½æ•°å¯¹å‚æ•°ç±»å‹æ²¡æœ‰è¦æ±‚ï¼Œä½†ä¸èƒ½ä¸ºerrorï¼‰
 		for (int i = 0; i < functionCall->actualParaList.size(); i++) 
 			string actualType = SemanticAnalyseExpression(functionCall->actualParaList[i]);
 		return functionCall->returnType = record->type;
 	}
-	if (functionCall->actualParaList.size() != record->amount) {//²ÎÊı¸öÊı²»Ò»ÖÂ checked
+	if (functionCall->actualParaList.size() != record->amount) {//å‚æ•°ä¸ªæ•°ä¸ä¸€è‡´ checked
 		addNumberErrorInformation(functionCall->functionId.first, functionCall->functionId.second, int(functionCall->actualParaList.size()), record->amount, "function");
 		return functionCall->returnType = record->type;
 	}
-	//¼ì²é¸÷Î»ÖÃµÄÊµ²ÎºÍĞÎ²ÎÀàĞÍÊÇ·ñÒ»ÖÂ ĞÎ²ÎÔÚ·ûºÅ±íÖĞµÄ¶¨Î»
+	//æ£€æŸ¥å„ä½ç½®çš„å®å‚å’Œå½¢å‚ç±»å‹æ˜¯å¦ä¸€è‡´ å½¢å‚åœ¨ç¬¦å·è¡¨ä¸­çš„å®šä½
 	for (int i = 0; i < functionCall->actualParaList.size(); i++) {
 		string actualType = SemanticAnalyseExpression(functionCall->actualParaList[i]);
 		string formalType = record->findXthFormalParaType(i + 1);
 		bool isRefered = record->isXthFormalParaRefered(i + 1);
 		if (isRefered && !(functionCall->actualParaList[i]->type == "var" && (functionCall->actualParaList[i]->variantReference->kind == "var" || functionCall->actualParaList[i]->variantReference->kind == "array"))) {
-			//¸Ã±í´ïÊ½²»ÄÜ×÷ÎªÒıÓÃĞÎ²Î¶ÔÓ¦µÄÊµ²Î checked
-			addGeneralErrorInformation("[Referenced actual parameter error!] <Line " + to_string(functionCall->actualParaList[i]->lineNumber) + "> The " + to_string(i + 1) + "th actual parameter expression should be a normal variable¡¢value parameter¡¢referenced parameter or array element.");
+			//è¯¥è¡¨è¾¾å¼ä¸èƒ½ä½œä¸ºå¼•ç”¨å½¢å‚å¯¹åº”çš„å®å‚ checked
+			addGeneralErrorInformation("[Referenced actual parameter error!] <Line " + to_string(functionCall->actualParaList[i]->lineNumber) + "> The " + to_string(i + 1) + "th actual parameter expression should be a normal variableã€value parameterã€referenced parameter or array element.");
 			continue;
 		}
-		if (!isRefered) { //´«Öµ²ÎÊıÖ§³Ö´Óintegerµ½realµÄÒşÊ½ÀàĞÍ×ª»»
+		if (!isRefered) { //ä¼ å€¼å‚æ•°æ”¯æŒä»integeråˆ°realçš„éšå¼ç±»å‹è½¬æ¢
 			if (actualType != formalType && !(actualType == "integer" && formalType == "real")) //checked
 				addExpressionTypeErrorInformation(functionCall->actualParaList[i], actualType, formalType, to_string(i + 1) + "th actual parameter of function call of \"" + functionCall->functionId.first + "\"");
 		}
-		else { //ÒıÓÃ²ÎÊıĞè±£³ÖÀàĞÍÇ¿Ò»ÖÂ
+		else { //å¼•ç”¨å‚æ•°éœ€ä¿æŒç±»å‹å¼ºä¸€è‡´
 			if (actualType != formalType) //checked
 				addExpressionTypeErrorInformation(functionCall->actualParaList[i], actualType, formalType, to_string(i + 1) + "th actual parameter of function call of \"" + functionCall->functionId.first + "\"");
 		}
@@ -578,10 +578,10 @@ string SemanticAnalyseExpression(_Expression* expression) {
 		cout << "[SemanticAnalyseExpression] pointer of _Expression is null" << endl;
 		return "";
 	}
-	if (expression->type == "var") { //»ñµÃÆÕÍ¨±äÁ¿/³£Á¿/Êı×éµÄÀàĞÍ //Èç¹ûÊÇintegerÀàĞÍµÄ³£Á¿
+	if (expression->type == "var") { //è·å¾—æ™®é€šå˜é‡/å¸¸é‡/æ•°ç»„çš„ç±»å‹ //å¦‚æœæ˜¯integerç±»å‹çš„å¸¸é‡
 		string variantReferenceType = SemanticAnalyseVariantReference(expression->variantReference);
-		if (variantReferenceType == "integer" && expression->variantReference->kind == "constant") {//intÀàĞÍµÄ³£Á¿
-			//²é·ûºÅ±í²é³ö³£Á¿Öµ
+		if (variantReferenceType == "integer" && expression->variantReference->kind == "constant") {//intç±»å‹çš„å¸¸é‡
+			//æŸ¥ç¬¦å·è¡¨æŸ¥å‡ºå¸¸é‡å€¼
 			_SymbolRecord* record = findSymbolRecord(currentSymbolTable, expression->variantReference->variantId.first);
 			if (record == NULL) {
 				cout << "[SemanticAnalyseExpression] pointer of record is null" << endl;
@@ -607,7 +607,7 @@ string SemanticAnalyseExpression(_Expression* expression) {
 		return expression->expressionType = "real";
 	else if (expression->type == "char")
 		return expression->expressionType = "char";
-	else if (expression->type == "function") //»ñµÃº¯Êıµ÷ÓÃµÄ·µ»ØÖµÀàĞÍ
+	else if (expression->type == "function") //è·å¾—å‡½æ•°è°ƒç”¨çš„è¿”å›å€¼ç±»å‹
 		return expression->expressionType = SemanticAnalyseFunctionCall(expression->functionCall);
 	else if (expression->type == "compound") {
 		if (expression->operationType == "relop") {
@@ -725,15 +725,15 @@ string SemanticAnalyseExpression(_Expression* expression) {
 	}
 }
 
-//¶Ô³ÌĞò½øĞĞÓïÒå·ÖÎö
+//å¯¹ç¨‹åºè¿›è¡Œè¯­ä¹‰åˆ†æ
 void SemanticAnalyseProgram(_Program *program) {
 	if (program == NULL) {
 		cout << "[SemanticAnalyseProgram] pointer of _Program is null" << endl;
 		return;
 	}
-	//¿âº¯ÊıÃû¡¢Ö÷³ÌĞòÃû¡¢Ö÷³ÌĞò²ÎÊı£¬ÔÚ¼ì²éÊÇ·ñÖØ¶¨ÒåÊ±£¬ÓÅÏÈ¼¶°´ÕÕÇ°ÃæÁĞ¾ÙµÄË³Ğò£¬
-	//¼´Ö÷³ÌĞòÃû²»ÄÜºÍ¿âº¯ÊıÃû£¬Ö÷³ÌĞò²ÎÊı²»ÄÜºÍ¿âº¯ÊıÃû¡¢Ö÷³ÌĞòÃûÍ¬Ãû
-	//Ìí¼ÓÖ÷³ÌĞòÃû¡¢ĞĞºÅ¡¢²ÎÊı¸öÊıµÈĞÅÏ¢
+	//åº“å‡½æ•°åã€ä¸»ç¨‹åºåã€ä¸»ç¨‹åºå‚æ•°ï¼Œåœ¨æ£€æŸ¥æ˜¯å¦é‡å®šä¹‰æ—¶ï¼Œä¼˜å…ˆçº§æŒ‰ç…§å‰é¢åˆ—ä¸¾çš„é¡ºåºï¼Œ
+	//å³ä¸»ç¨‹åºåä¸èƒ½å’Œåº“å‡½æ•°åï¼Œä¸»ç¨‹åºå‚æ•°ä¸èƒ½å’Œåº“å‡½æ•°åã€ä¸»ç¨‹åºååŒå
+	//æ·»åŠ ä¸»ç¨‹åºåã€è¡Œå·ã€å‚æ•°ä¸ªæ•°ç­‰ä¿¡æ¯
 	set<string> lib;
 	lib.insert("read");
 	lib.insert("write");
@@ -742,206 +742,37 @@ void SemanticAnalyseProgram(_Program *program) {
 	if (lib.count(program->programId.first)) //checked
 		addGeneralErrorInformation("[Duplicate defined error!] <Line " + to_string(program->programId.second) + "> Name of program \"" + program->programId.first + "\" has been defined as a lib program.");
 	mainSymbolTable->addProgramName(program->programId.first, program->programId.second, "procedure", int(program->paraList.size()), "");
-	//½«Ö÷³ÌĞòµÄ²ÎÊıÌí¼Óµ½Ö÷·ûºÅ±íÖĞ£¬flag¶¨Îª"parameter of program"
-	for (int i = 0; i < program->paraList.size(); i++) {//¼ì²éÖ÷³ÌĞò²ÎÊıÊÇ·ñºÍÖ÷³ÌĞòÃûÍ¬Ãû
+	//å°†ä¸»ç¨‹åºçš„å‚æ•°æ·»åŠ åˆ°ä¸»ç¬¦å·è¡¨ä¸­ï¼Œflagå®šä¸º"parameter of program"
+	for (int i = 0; i < program->paraList.size(); i++) {//æ£€æŸ¥ä¸»ç¨‹åºå‚æ•°æ˜¯å¦å’Œä¸»ç¨‹åºååŒå
 		if (program->paraList[i].first == program->programId.first) //checked
 			addGeneralErrorInformation("[Duplicate defined error!] <Line " + to_string(program->programId.second) + "> parameter of program \"" + program->programId.first + "\" is the same as name of program.");
 		else if (lib.count(program->paraList[i].first)) //checked
 			addGeneralErrorInformation("[Dulicate defined error!] <Line " + to_string(program->paraList[i].second) + "> parameter of program \"" + program->paraList[i].first + "\" has been defined as a lib program.");
 		mainSymbolTable->addVoidPara(program->paraList[i].first, program->paraList[i].second);
 	}
-	//Ö÷·ûºÅ±íĞèÌáÇ°¼ÓÈëread¡¢write¡¢exitµÈ¿âº¯Êı
-	//¶ÔÓÚ¿âº¯ÊıÀ´Ëµ£¬setProcedureµÄºóÈı¸ö²ÎÊı,lineNumber,amount,subSymbolTableÊÇÃ»ÓĞÓÃµÄ
-	//lineNumber=-1ÇÒsubSymbolTable=NULL±íÊ¾ÊÇ¿âº¯Êı
-	//amount=-1±íÊ¾±ä²Î
-	//Ìí¼Óread¹ı³Ì£¬¸Ã¹ı³Ì±ä²Î
+	//ä¸»ç¬¦å·è¡¨éœ€æå‰åŠ å…¥readã€writeã€exitç­‰åº“å‡½æ•°
+	//å¯¹äºåº“å‡½æ•°æ¥è¯´ï¼ŒsetProcedureçš„åä¸‰ä¸ªå‚æ•°,lineNumber,amount,subSymbolTableæ˜¯æ²¡æœ‰ç”¨çš„
+	//lineNumber=-1ä¸”subSymbolTable=NULLè¡¨ç¤ºæ˜¯åº“å‡½æ•°
+	//amount=-1è¡¨ç¤ºå˜å‚
+	//æ·»åŠ readè¿‡ç¨‹ï¼Œè¯¥è¿‡ç¨‹å˜å‚
 	mainSymbolTable->addProcedure("read", -1, -1, NULL);
-	//Ìí¼Ówrite¹ı³Ì£¬¸Ã¹ı³Ì±ä²Î
+	//æ·»åŠ writeè¿‡ç¨‹ï¼Œè¯¥è¿‡ç¨‹å˜å‚
 	mainSymbolTable->addProcedure("write", -1, -1, NULL);
-	//Ìí¼Ówriteln¹ı³Ì£¬¸Ã¹ı³Ì±ä²Î
+	//æ·»åŠ writelnè¿‡ç¨‹ï¼Œè¯¥è¿‡ç¨‹å˜å‚
 	mainSymbolTable->addProcedure("writeln", -1, -1, NULL);
-	//Ìí¼Óexit¹ı³Ì£¬¸Ã¹ı³ÌµÄ²ÎÊı¸öÊıĞèÒª·ÖÇé¿öÌÖÂÛ£¬³ÌĞòÀï»áÓĞÌØÅĞ£¬ÕâÀïÖ¸¶¨Îª0Ã»ÓĞÌØÊâº¬Òå
+	//æ·»åŠ exitè¿‡ç¨‹ï¼Œè¯¥è¿‡ç¨‹çš„å‚æ•°ä¸ªæ•°éœ€è¦åˆ†æƒ…å†µè®¨è®ºï¼Œç¨‹åºé‡Œä¼šæœ‰ç‰¹åˆ¤ï¼Œè¿™é‡ŒæŒ‡å®šä¸º0æ²¡æœ‰ç‰¹æ®Šå«ä¹‰
 	mainSymbolTable->addProcedure("exit", -1, 0, NULL);
 	SemanticAnalyseSubprogram(program->subProgram);
 }
 
-
-
-// void addDuplicateDefinitionErrorInformation(string preId, int preLineNumber, string preFlag, string preType, int curLineNumber){
-// 	string errorInformation = "[Duplicate defined error!] <Line " + to_string(curLineNumber) + "> ";
-// 	if (preLineNumber != -1)
-// 		errorInformation += "\"" + preId + "\"" + " has already been defined as a " + preFlag + " at line " + to_string(preLineNumber) + ".";
-// 	else
-// 		errorInformation += "\"" + preId + "\"" + " has already been defined as a lib program.";
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-// void addUndefinedErrorInformation(string id, int curLineNumber) {
-// 	string errorInformation;
-// 	errorInformation = "[Undefined identifier!] <Line " + to_string(curLineNumber) + "> ";
-// 	errorInformation += id + " has not been defined.";
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-// void addUsageTypeErrorInformation(string curId, int curLineNumber, string curType, string usage, string correctType) {
-// 	string errorInformation;
-// 	errorInformation = "[Usage type error!] <Line " + to_string(curLineNumber) + "> ";
-// 	errorInformation += "\"" + curId + "\"" + " used for " + usage + " should be " + correctType + " but not " + curType + ".";
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-// //Êı×éÏÂ±ê¸öÊı²»Æ¥Åä¡¢º¯Êı»ò¹ı³ÌµÄÊµ²ÎºÍĞÎ²ÎµÄ¸öÊı²»Æ¥Åä
-// void addNumberErrorInformation(string curId, int curLineNumber, int curNumber, int correctNumber, string usage) {
-// 	string errorInformation;
-// 	if (usage == "array") {
-// 		errorInformation += "[Array index number mismatch!] ";
-// 		errorInformation += "<Line " + to_string(curLineNumber) + "> ";
-// 		errorInformation += "Array \"" + curId + "\"" + " should have " + to_string(correctNumber) + " but not " + to_string(curNumber) + " indices.";
-// 	}
-// 	else if (usage == "procedure") {
-// 		errorInformation += "[Procedure parameter number mismatch!] ";
-// 		errorInformation += "<Line " + to_string(curLineNumber) + "> ";
-// 		errorInformation += "Procedure \"" + curId + "\"" + " should have " + to_string(correctNumber) + " but not " + to_string(curNumber) + " parameters.";
-// 	}
-// 	else if (usage == "function") {
-// 		errorInformation += "[Function parameter number mismatch!] ";
-// 		errorInformation += "<Line " + to_string(curLineNumber) + "> ";
-// 		errorInformation += "Function \"" + curId + "\"" + " should have " + to_string(correctNumber) + " but not " + to_string(curNumber) + " parameters.";
-// 	}
-// 	else {
-// 		cout << "[addNumberErrorInformation] usage error" << endl;
-// 		return;
-// 	}
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-// void addPreFlagErrorInformation(string curId, int curLineNumber, string curFlag, int preLineNumber, string preFlag) {
-// 	string errorInformation;
-// 	errorInformation += "[Symbol kinds mismatch!] ";
-// 	errorInformation += "<Line " + to_string(curLineNumber) + "> ";
-// 	errorInformation += "\"" + curId + "\"" + " defined at line " + to_string(preLineNumber) + " is a " + preFlag + " but not a " + curFlag + ".";
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-// void addExpressionTypeErrorInformation(_Expression *exp, string curType, string correctType, string description) {
-// 	string errorInformation;
-// 	errorInformation += "[Expression type error!] ";
-// 	errorInformation += "<Line " + to_string(exp->lineNumber) + "> ";
-// 	string expression;
-// 	inputExpression(exp, expression, 1);
-// 	errorInformation += "Expression \"" + expression + "\" used for " + description + " should be " + correctType + " but not " + curType + ".";
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-// void addAssignTypeMismatchErrorInformation(_VariantReference *leftVariantReference, _Expression *rightExpression) {
-// 	string errorInformation;
-// 	errorInformation += "[Assign statement type mismatch!] ";
-// 	errorInformation += "<Left at line " + to_string(leftVariantReference->variantId.second) + ", right at line " + to_string(rightExpression->lineNumber) + "> ";
-// 	string varRef, exp;
-// 	inputVariantRef(leftVariantReference, varRef, 1);
-// 	inputExpression(rightExpression, exp, 1);
-// 	errorInformation += "Left \"" + varRef + "\" type is " + leftVariantReference->variantType + " while right \"" + exp + "\" type is " + rightExpression->expressionType + ".";
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-// void addArrayRangeOutOfBoundErrorInformation(_Expression *expression, string arrayId, int X, pair<int,int> range){
-// 	string errorInformation;
-// 	errorInformation += "[Array range out of bound!] ";
-// 	errorInformation += "<Line " + to_string(expression->lineNumber) + "> ";
-// 	string exp;
-// 	inputExpression(expression, exp, 1);
-// 	errorInformation += "The value of expression \"" + exp + "\"" + " is " + to_string(expression->totalIntValue);
-// 	errorInformation += ", but the range of array \"" + arrayId + "\" " + to_string(X) + "th index is " + to_string(range.first) + " to " + to_string(range.second) + ".";
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-//
-// void addArrayRangeUpSideDownErrorInformation(string curId, int curLineNumber, int X, int lowBound, int highBound) {
-// 	string errorInformation;
-// 	errorInformation += "[Array range upsidedown error!] ";
-// 	errorInformation += "<Line " + to_string(curLineNumber) + "> ";
-// 	errorInformation += to_string(X) + "th range of array \"" + curId + "\" have larger low bound and smaller high bound, which is " + to_string(lowBound) + " and " + to_string(highBound) + ".";
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-// void addOperandExpressionsTypeMismatchErrorInformation(_Expression *exp1, _Expression *exp2){
-// 	string errorInformation;
-// 	errorInformation += "[Operands expression type mismatch!] ";
-// 	errorInformation += "<Left at line " + to_string(exp1->lineNumber) + ", right at line " + to_string(exp2->lineNumber) + "> ";
-// 	string expStr1, expStr2;
-// 	inputExpression(exp1, expStr1, 1);
-// 	inputExpression(exp2, expStr2, 1);
-// 	errorInformation += "Left \"" + expStr1 + "\" type is " + exp1->expressionType + " while right " + "\"" + expStr2 + "\" type is " + exp2->expressionType + ".";
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-// void addSingleOperandExpressionTypeMismatchErrorInformation(_Expression *exp, string correctType){
-// 	string errorInformation;
-// 	errorInformation += "[Operand expression type error!] ";
-// 	errorInformation += "<Line " + to_string(exp->lineNumber) + "> ";
-// 	string expStr;
-// 	inputExpression(exp, expStr, 1);
-// 	errorInformation += "Expression \"" + expStr + "\" type should be " + correctType + " but not " + exp->expressionType + ".";
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-// void addactualParameterOfReadErrorInformation(int curLineNumber, string procedureId, int X, _Expression *exp) {
-// 	string errorInformation;
-// 	errorInformation += "[Actual parameter of read procedure type error!] ";
-// 	errorInformation += "<Line " + to_string(curLineNumber) + "> ";
-// 	string expression;
-// 	inputExpression(exp, expression, 1);
-// 	errorInformation += "\"" + procedureId + "\" " + to_string(X) + "th expression parameter \"" + expression + "\" is not a variant or an array element.";
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-// void addDivideZeroErrorInformation(string operation, _Expression *exp) {
-// 	string errorInformation;
-// 	errorInformation += "[Divide zero error!] ";
-// 	errorInformation += "<Line " + to_string(exp->lineNumber) + "> ";
-// 	string expression;
-// 	inputExpression(exp, expression, 1);
-// 	errorInformation += "The value of expression \"" + expression + "\" is 0, which is the second operand of operation \"" + operation + "\".";
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-// void addReadBooleanErrorInformation(_Expression *exp, int X) {
-// 	string errorInformation;
-// 	string expression;
-// 	inputExpression(exp, expression, 1);
-// 	errorInformation = "[Read boolean error!] ";
-// 	errorInformation += "<Line " + to_string(exp->lineNumber) + "> ";
-// 	errorInformation += "The " + to_string(X) + "th actual parameter of read \"" + expression + "\" is boolean, it can't be read.";
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-//
-// void addGeneralErrorInformation(string errorInformation) {
-// 	semanticErrorInformation.push_back(errorInformation);
-// 	CHECK_ERROR_BOUND
-// }
-
-bool checkIsTheSameAsKey(string id, int lineNumber) { //ÕâÀïµÄKeyÖ¸µÄÊÇ¿â³ÌĞòÃû¡¢Ö÷³ÌĞòÃû¡¢Ö÷³ÌĞò²ÎÊı
+bool checkIsTheSameAsKey(string id, int lineNumber) { //è¿™é‡Œçš„KeyæŒ‡çš„æ˜¯åº“ç¨‹åºåã€ä¸»ç¨‹åºåã€ä¸»ç¨‹åºå‚æ•°
 	for (int i = 0; i <= mainSymbolTable->recordList[0]->amount + 4; i++) {
 		if (id == mainSymbolTable->recordList[i]->id) {
-			if (i == 0) //ÓëÖ÷³ÌĞòÃûÍ¬Ãû checked
+			if (i == 0) //ä¸ä¸»ç¨‹åºååŒå checked
 				addGeneralErrorInformation("[Duplicate defined error!] <Line " + to_string(lineNumber) + "> \"" + id + "\" has been defined as the name of program at Line " + to_string(mainSymbolTable->recordList[i]->lineNumber) + ".");
-			else if (i >= 1 && i <= mainSymbolTable->recordList[0]->amount) //ÓëÖ÷³ÌĞò²ÎÊıÍ¬Ãû checked
+			else if (i >= 1 && i <= mainSymbolTable->recordList[0]->amount) //ä¸ä¸»ç¨‹åºå‚æ•°åŒå checked
 				addGeneralErrorInformation("[Duplicate defined error!] <Line " + to_string(lineNumber) + "> \"" + id + "\" has been defined as a program parameter at Line " + to_string(mainSymbolTable->recordList[i]->lineNumber) + ".");
-			else //Óë¿â³ÌĞòÍ¬Ãû checked
+			else //ä¸åº“ç¨‹åºåŒå checked
 				addGeneralErrorInformation("[Duplicate defined error!] <Line " + to_string(lineNumber) + "> \"" + id + "\" has been defined as a lib program.");
 			return true;
 		}
